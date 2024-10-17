@@ -1,10 +1,10 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
+import express, { json } from 'express';
+import { connect } from 'mongoose';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 // connect to database
-mongoose.connect('mongodb+srv://cloudyloops:cloudy._.loops11@cluster0.df06p.mongodb.net/')
+connect('mongodb+srv://cloudyloops:cloudy._.loops11@cluster0.df06p.mongodb.net/')
     .then(() => console.log('MongoDB connected'))
     .catch((error) => console.log(error));
 
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5001;
 
 app.use(
     cors({
-        origin : 'http://localhost:5173/',
+        origin : 'http://localhost:5173',
         methods : ['GET', 'POST', 'DELETE', 'PUT'],
         allowedHeaders : [
             'Content-Type',
@@ -29,6 +29,6 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use(express.json());
+app.use(json());
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));

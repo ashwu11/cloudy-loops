@@ -8,6 +8,7 @@ function App() {
   return (
     <div className="flex flex-col overflow-hidden bg-white">
       {/* components */}
+      <h1>I'm a component!</h1>
 
       {/* routes */}
       <Routes>
