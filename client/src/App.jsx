@@ -8,16 +8,20 @@ import AdminFeatures from "./views/admin/features"
 import AdminOrders from "./views/admin/orders"
 import AdminProducts from "./views/admin/products"
 import ShopLayout from "./components/shop/layout"
-import PageNotFound from "./views/page-not-found"
 import ShopHome from "./views/shop/home"
 import ShopAccount from "./views/shop/account"
 import ShopProducts from "./views/shop/products"
 import ShopCheckout from "./views/shop/checkout"
 import VerifyAuth from "./components/common/verify-auth"
+import Restricted from "./views/unhappy-path/restricted"
+import PageNotFound from "./views/unhappy-path/not-found"
 
 function App() {
-  const isAuthenticated = false;
-  const user = null;
+  const isAuthenticated = true;
+  const mockUser = {
+    name : "cloudy",
+    role : "user"
+  };
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
@@ -25,12 +29,12 @@ function App() {
 
       {/* routes */}
       <Routes>
-        {/* default page */}
+        {/* default */}
         <Route path="/" element={<ShopLayout />} />
 
         {/* authentication */}
         <Route path="/auth" element={
-          <VerifyAuth isAuthenticated={isAuthenticated} user={user}>
+          <VerifyAuth isAuthenticated={isAuthenticated} user={mockUser}>
             <AuthLayout />
           </VerifyAuth>
         }>
@@ -40,7 +44,7 @@ function App() {
 
         {/* admin */}
         <Route path="/admin" element={
-          <VerifyAuth isAuthenticated={isAuthenticated} user={user}>
+          <VerifyAuth isAuthenticated={isAuthenticated} user={mockUser}>
             <AdminLayout />
           </VerifyAuth>
         }>
@@ -52,7 +56,7 @@ function App() {
 
         {/* shop */}
         <Route path="/shop" element={
-          <VerifyAuth isAuthenticated={isAuthenticated} user={user}>
+          <VerifyAuth isAuthenticated={isAuthenticated} user={mockUser}>
             <ShopLayout />
           </VerifyAuth>
         }>
@@ -62,7 +66,8 @@ function App() {
           <Route path="checkout" element={<ShopCheckout />} />
         </Route>
 
-        {/* page not found */}
+        {/* unhappy path */}
+        <Route path="/restricted" element={<Restricted />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
