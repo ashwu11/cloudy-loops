@@ -1,6 +1,6 @@
 function AdminProducts() {
     return (
-        <div>admin products</div>
+        <div>admin products!</div>
     );
 }
 

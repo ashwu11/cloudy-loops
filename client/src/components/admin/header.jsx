@@ -1,6 +1,6 @@
 function AdminHeader() {
     return (
-        <h1>admin header</h1>
+        <div>admin header!</div>
     );
 }
 

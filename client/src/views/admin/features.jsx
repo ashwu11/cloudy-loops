@@ -1,6 +1,6 @@
 function AdminFeatures() {
     return (
-        <div>admin features</div>
+        <div>admin features!</div>
     );
 }
 

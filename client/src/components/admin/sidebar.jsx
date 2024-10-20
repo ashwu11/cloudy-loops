@@ -1,6 +1,6 @@
 function AdminSideBar() {
     return (
-        <h1>admin side bar!</h1>
+        <div>admin side bar!</div>
     );
 }
 
