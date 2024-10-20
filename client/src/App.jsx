@@ -13,23 +13,37 @@ import ShopHome from "./views/shop/home"
 import ShopAccount from "./views/shop/account"
 import ShopProducts from "./views/shop/products"
 import ShopCheckout from "./views/shop/checkout"
+import VerifyAuth from "./components/common/verify-auth"
 
 function App() {
+  const isAuthenticated = false;
+  const user = null;
+
   return (
     <div className="flex flex-col overflow-hidden bg-white">
       {/* components */}
-      <h1>I'm a component!</h1>
 
       {/* routes */}
       <Routes>
+        {/* default page */}
+        <Route path="/" element={<ShopLayout />} />
+
         {/* authentication */}
-        <Route path="/auth" element={<AuthLayout />}>
+        <Route path="/auth" element={
+          <VerifyAuth isAuthenticated={isAuthenticated} user={user}>
+            <AuthLayout />
+          </VerifyAuth>
+        }>
           <Route path="login" element={<AuthLogin />} />
           <Route path="register" element={<AuthRegister />} />
         </Route>
 
         {/* admin */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={
+          <VerifyAuth isAuthenticated={isAuthenticated} user={user}>
+            <AdminLayout />
+          </VerifyAuth>
+        }>
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="orders" element={<AdminOrders />} />
           <Route path="products" element={<AdminProducts />} />
@@ -37,7 +51,11 @@ function App() {
         </Route>
 
         {/* shop */}
-        <Route path="/shop" element={<ShopLayout />}>
+        <Route path="/shop" element={
+          <VerifyAuth isAuthenticated={isAuthenticated} user={user}>
+            <ShopLayout />
+          </VerifyAuth>
+        }>
           <Route path="home" element={<ShopHome />} />
           <Route path="account" element={<ShopAccount />} />
           <Route path="products" element={<ShopProducts />} />

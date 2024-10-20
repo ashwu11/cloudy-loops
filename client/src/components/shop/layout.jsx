@@ -6,6 +6,7 @@ function ShopLayout() {
         <div className="flex flex-col bg-white overflow-hidden">
             <ShopHeader />
             <main className="flex flex-col w-full">
+                <h1>Shop layout!</h1>
                 <Outlet />
             </main>
         </div>
