@@ -17,11 +17,12 @@ import Restricted from "./views/unhappy-path/restricted"
 import PageNotFound from "./views/unhappy-path/not-found"
 
 function App() {
-  const isAuthenticated = true;
-  const mockUser = {
-    name : "cloudy",
-    role : "user"
-  };
+  const isAuthenticated = false;
+  const mockUser = null;
+  // {
+  //   name : "cloudy",
+  //   role : "user"
+  // };
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
