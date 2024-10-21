@@ -1,9 +1,9 @@
-import { SelectItem } from "@radix-ui/react-select";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Select, SelectContent, SelectTrigger, SelectValue } from "../ui/select";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
+import { SelectItem } from "@radix-ui/react-select"
+import { Input } from "../ui/input"
+import { Label } from "../ui/label"
+import { Select, SelectContent, SelectTrigger, SelectValue } from "../ui/select"
+import { Textarea } from "../ui/textarea"
+import { Button } from "../ui/button"
 
 const types = {
     INPUT: "input",
@@ -11,11 +11,10 @@ const types = {
     TEXTAREA: "textarea"
 }
 
-function CommonForm({ formControls, formData, setData, onSubmit, buttonText }) {
+function CommonForm({ formControls, formData, setFormData, onSubmit, buttonText }) {
     function renderInputByComponentType(controlItem) {
         let element = null;
         const value = formData[controlItem.name] || '';
-
 
         switch (controlItem.componentType) {
             case types.INPUT:
@@ -27,7 +26,7 @@ function CommonForm({ formControls, formData, setData, onSubmit, buttonText }) {
                         type={controlItem.type}
                         value={value}
                         onChange={(e) =>
-                            setData({
+                            setFormData({
                                 ...formData,
                                 [controlItem.name]: e.target.value,
                             })
@@ -37,7 +36,7 @@ function CommonForm({ formControls, formData, setData, onSubmit, buttonText }) {
                 break;
             case types.SELECT:
                 element = (
-                    <Select onValueChange={(value) => setData({
+                    <Select onValueChange={(value) => setFormData({
                         ...formData,
                         [controlItem.name]: value
                     })} value={value}>
@@ -63,7 +62,7 @@ function CommonForm({ formControls, formData, setData, onSubmit, buttonText }) {
                         id={controlItem.id}
                         value={value}
                         onChange={(e) =>
-                            setData({
+                            setFormData({
                                 ...formData,
                                 [controlItem.name]: e.target.value,
                             })
@@ -81,7 +80,7 @@ function CommonForm({ formControls, formData, setData, onSubmit, buttonText }) {
                         type={controlItem.type}
                         value={value}
                         onChange={(e) =>
-                            setData({
+                            setFormData({
                                 ...formData,
                                 [controlItem.name]: e.target.value,
                             })
