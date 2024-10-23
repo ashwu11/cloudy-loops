@@ -1,25 +1,20 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../../models/User');
+import jwt from 'jsonwebtoken';
+import User from '../../models/User.js';
+import pkg from 'bcryptjs';
+const { hash } = pkg;
 
 // register
-const register = async (req, res) => {
+const registerUser = async (req, res) => {
     const { userName, email, password } = req.body;
 
     try {
         // hash password
-        const hashPassword = await bcrypt.hash(password, 11);
+        const hashPassword = await hash(password, 11);
         const user = new User({
             userName, email, password: hashPassword
         })
 
-        await user.save((error) => {
-            if(error){
-                console.log(error);
-                return;
-            }
-        });
-
+        await user.save();
         res.status(200).json({
             success: true,
             message: "Registration success!"
@@ -29,7 +24,8 @@ const register = async (req, res) => {
         console.log(e);
         res.status(500).json({
             success: false,
-            message: "An error occured :("
+            message: "An error occured :(",
+            error: e.message
         });
     }
 };
@@ -55,4 +51,6 @@ const login = async (req, res) => {
 
 
 
-// in between
+// middleware
+
+export default registerUser;

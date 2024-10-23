@@ -1,7 +1,8 @@
-import express, { json } from 'express';
-import { connect } from 'mongoose';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
+import express, { json } from 'express'
+import { connect } from 'mongoose'
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
+import authRouter from './routes/auth/auth-routes.js'
 
 // connect to database
 connect('mongodb+srv://cloudyloops:cloudy._.loops11@cluster0.df06p.mongodb.net/')
@@ -30,5 +31,6 @@ app.use(
 
 app.use(cookieParser());
 app.use(json());
+app.use('/api/auth', authRouter);
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
