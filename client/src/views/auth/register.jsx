@@ -23,10 +23,15 @@ function AuthRegister() {
         dispatch(registerUser(formData)).then((data) => {
             console.log(data);
             toast({
-                title: "Registration successful!",
-                description: "You can now log in to your account",
+                title: data?.payload?.message,
+                description: data?.payload?.description
             });
-            if (data?.payload?.success) navigate("/auth/login");
+
+            if (data?.payload?.success) {
+                navigate("/auth/login");
+            } else {
+                // TODO
+            }
         });
     }
 
