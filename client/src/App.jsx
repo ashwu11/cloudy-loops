@@ -15,14 +15,10 @@ import ShopCheckout from "./views/shop/checkout"
 import VerifyAuth from "./components/common/verify-auth"
 import Restricted from "./views/unhappy-path/restricted"
 import PageNotFound from "./views/unhappy-path/not-found"
+import { useSelector } from "react-redux"
 
 function App() {
-  const isAuthenticated = false;
-  const mockUser = null;
-  // {
-  //   name : "cloudy",
-  //   role : "user"
-  // };
+  const {user, isAuthenticated} = useSelector(state => state.auth)
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
@@ -35,7 +31,7 @@ function App() {
 
         {/* authentication */}
         <Route path="/auth" element={
-          <VerifyAuth isAuthenticated={isAuthenticated} user={mockUser}>
+          <VerifyAuth isAuthenticated={isAuthenticated} user={user}>
             <AuthLayout />
           </VerifyAuth>
         }>
@@ -45,7 +41,7 @@ function App() {
 
         {/* admin */}
         <Route path="/admin" element={
-          <VerifyAuth isAuthenticated={isAuthenticated} user={mockUser}>
+          <VerifyAuth isAuthenticated={isAuthenticated} user={user}>
             <AdminLayout />
           </VerifyAuth>
         }>
@@ -57,7 +53,7 @@ function App() {
 
         {/* shop */}
         <Route path="/shop" element={
-          <VerifyAuth isAuthenticated={isAuthenticated} user={mockUser}>
+          <VerifyAuth isAuthenticated={isAuthenticated} user={user}>
             <ShopLayout />
           </VerifyAuth>
         }>

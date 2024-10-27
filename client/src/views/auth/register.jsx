@@ -21,7 +21,7 @@ function AuthRegister() {
     function onSubmit(event) {
         event.preventDefault();
         dispatch(registerUser(formData)).then((data) => {
-            console.log(data);
+            // console.log(data);
             toast({
                 title: data?.payload?.message,
                 description: data?.payload?.description
