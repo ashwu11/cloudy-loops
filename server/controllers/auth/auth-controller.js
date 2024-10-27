@@ -2,8 +2,9 @@ import jwt from 'jsonwebtoken';
 import User from '../../models/User.js';
 import bcrypt from 'bcryptjs';
 const { hash } = bcrypt;
+const CLIENT_SECRET_KEY = "super_secret_key"
 
-// register
+// register controller
 export const registerUser = async (req, res) => {
     const { userName, email, password } = req.body;
 
@@ -40,8 +41,8 @@ export const registerUser = async (req, res) => {
 };
 
 
-// login
-export const login = async (req, res) => {
+// login controller
+export const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -49,7 +50,7 @@ export const login = async (req, res) => {
         const targetUser = await User.findOne({ email });
         if (!targetUser) return res.json({
             success: false,
-            message: "User does not exist!",
+            message: "User does not exist :(",
             description: "Please create an account to log in"
         });
 
@@ -57,28 +58,26 @@ export const login = async (req, res) => {
         const checkPassword = await bcrypt.compare(password, targetUser.password)
         if (!checkPassword) return res.json({
             success: false,
-            message: "Incorrect password",
+            message: "Incorrect password :(",
             description: "Please try again"
         });
 
-        // create a token
-        const token = jwt.sign({
-            id: targetUser.id,
-            role: targetUser.role,
-            email: targetUser.email
-        }, 'CLIENT_SECRET_KEY',
+        // create token
+        const token = jwt.sign(
+            { id: targetUser.id, role: targetUser.role, email: targetUser.email },
+            CLIENT_SECRET_KEY,
             { expiresIn: '60m' }
-        )
+        );
 
         res.cookie('token', token, { httpOnly: true, secure: false }).json({
             success: true,
-            message: "Logged in successfully",
+            message: "Logged in successfully!",
             user: {
                 email: targetUser.email,
                 role: targetUser.role,
                 id: targetUser.id
             }
-        })
+        });
 
     } catch (e) {
         console.log(e);
