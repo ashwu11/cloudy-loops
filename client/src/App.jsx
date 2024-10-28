@@ -18,7 +18,7 @@ import PageNotFound from "./views/unhappy-path/not-found"
 import { useSelector } from "react-redux"
 
 function App() {
-  const {user, isAuthenticated} = useSelector(state => state.auth)
+  const { user, isAuthenticated } = useSelector(state => state.auth)
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">

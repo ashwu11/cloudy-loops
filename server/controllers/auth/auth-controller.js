@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../../models/User.js';
 import bcrypt from 'bcryptjs';
-const { hash } = bcrypt;
+
 const CLIENT_SECRET_KEY = "super_secret_key"
 
 // register controller
@@ -89,8 +89,13 @@ export const loginUser = async (req, res) => {
 };
 
 
-// logout
-
+// logout controller
+export const logout = (req, res) => {
+    res.clearCookie('token').json({
+        success: true,
+        message: "Logged out successfully!"
+    });
+};
 
 
 // middleware

@@ -13,7 +13,6 @@ connect('mongodb+srv://cloudyloops:cloudy._.loops11@cluster0.df06p.mongodb.net/'
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-
 app.use(
     cors({
         origin : 'http://localhost:5173',
