@@ -90,7 +90,7 @@ export const loginUser = async (req, res) => {
 
 
 // logout controller
-export const logout = (req, res) => {
+export const logoutUser = (req, res) => {
     res.clearCookie('token').json({
         success: true,
         message: "Logged out successfully!"
@@ -99,5 +99,21 @@ export const logout = (req, res) => {
 
 
 // middleware
+export const authMiddleware = async (req, res, next) => {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({
+        success: false,
+        message: "User is unauthorized!"
+    });
 
-
+    try {
+        const decoded = jwt.verify(token, 'CLIENT_SECRET_KEY');
+        req.user = decoded;
+        next();
+    } catch (e) {
+        res.status(401).json({
+            success: false,
+            message: "User is unauthorized!"
+        });
+    }
+};
